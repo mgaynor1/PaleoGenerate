@@ -15,6 +15,12 @@ PaleoGenerate is an R project used to generate Bioclim variables at time between
 | BIO14 | Precipitation of Driest Month |
 | BIO15 | Precipitation Seasonality |
 
+Despite the ability of these scripts to generate predictions for additional variables, we caution this use. Historical trends in temperature and precipitation are temporally and spatially distinct; given the use of temperature data for extrapolation, we conservatively excluded layers that are based on a relationship between precipitation and temperature (Bio8–Bio11 and Bio16–Bio19). Our methods substantially improve upon Oscillayers [(Gamisch, 2019](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12979), a recent similar attempt to generate gridded paleoclimate data with high temporal resolution, which has been the subject of criticism [Brown et al. 2020](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.13103). Our work addresses a number of these criticisms. Among the limitations pointed out by Brown et al. (2020)  is that the Oscillayers approach assumes no spatio-temporal variation in climates; this is potentially problematic because historical climate change had high spatial heterogeneity. We address this limitation by utilizing a stronger set of historical time periods through Paleoclim layers and avoid extrapolation in the predictions. However, as an important potential shortcoming, we point out that we are assuming a linear relationship between global temperature and precipitation for the precipitation datasets; therefore we caution care in the use of the the use of our precipitation layers (Bio12, Bio13, Bio14, and Bio15) but provide them for the benefit of interested users. 
+
+## Workflow
+![Figure 1: Flowchart of workflow for generating layers with PaleoGenerate. Red points in Hansen plot indicate the corresponding surface temperature for each time point included.](Workflow.jpg)
+
+
 ## Set-up
 Locally, I set up an [R project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). This is where I generated the input files for PaleoGenerate and tested the functions.
 
