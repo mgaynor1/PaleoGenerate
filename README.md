@@ -64,8 +64,16 @@ We implemented these methods to generate layers for 51 time slices between 0 and
 
 ## Prediction testing
 
+We aimed to use our reconstruction method to infer time points between 0 - 3.3 MYA, therefore we tested the ability of our method to reconstruct time points within the temporal extent of PaleoClim data (0.021 mya, 0.787 mya, and 3.264 mya). Reconstruction accuracy was assessed via a jackknife approach, successively removing one layer at a time and predicting the missing raster. The mean difference between the PaleoClim layer and the inferred layer was calculated using the overlay function from the raster R package. In addition, we calculated the pearson correlation coefficient between layers using layerStats function from the raster R package. Our time slices overlapped with 30 points inferred by Gamisch (2019), so as an additional comparison among methods we calculated mean difference and the Pearson correlation coefficient between Oscillayers and our predicted layers at these points. 
+
+Based on our jackknife approach applied to infer bio1 for 0.021, 0.787, and 3.3 MYA, we found Pearson correlation coefficients (r) of 0.744, 0.839, and 0.921 respectively (See predction_testing/Supplemental-Tables.pdf, Table S1), indicating high overall similarity at the global scale to the layers inferred by PaleoClim. However, there are restricted areas of the globe where our method of prediction is quite different from the PaleoClim layers (See predction_testing/Supplemental-Figures.pdf, Figure S1). Specifically, for the Last Glacial Maximum subarctic regions were estimated to be slightly cooler, while coastal regions between 60 and 0 latitude were predicted to be warmer than the PaleoClim predictions. Our prediction for Marine Isotope Stage (MIS) 19 (0.787 mya) differed the most from the PaleoClim prediction in coastal regions, with the coast between 60 and 90 latitude found to be slightly cooler, however between 60 and 0 latitude found to be slightly warmer. Deviations at the coast for marine isotope stage M2 (circa 3.3 Ma) were the same as for MIS19. We found predictioned mean differences were not consistently warmer or colder (See predction_testing/Supplemental-Tables.pdf, Table S1). 
+
+Compared to Oscillayers (Gamisch 2019) we found that our inferred layers were overall very similar, with r ranging from 0.801 to 0.956 (See predction_testing/Supplemental-Tables.pdf, Table S2). Overall, no regions were consistently warmer or colder among the time points compared (See predction_testing/Supplemental-Figures.pdf, Figure S1).  
+
+
 
 ---
 
 ## Citation 
 
+Folk RA*, Gaynor ML*, Okuyama Y, Grady CJ, and Guralnick RP. Ancestral niche and range contact through time in the Heuchera group. In prep. 
