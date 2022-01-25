@@ -30,7 +30,7 @@ Historical trends in temperature and precipitation are temporally and spatially 
 
 
 ### Input Files
-Input data files (data.zip) were too large to upload to github, instead they can be downloaded here: . We obtained from [PaleoClim layers](http://paleoclim.org/) ([Brown et al. 2018)](https://www.nature.com/articles/sdata2018254) included the following:
+Input data files (data/) were too large to upload to github, instead they can be downloaded as described. We obtained from [PaleoClim layers](http://paleoclim.org/) ([Brown et al. 2018)](https://www.nature.com/articles/sdata2018254) included the following (data/InputLayers):
 
 | Name | Age |
 | ------------ | ------------- |
@@ -39,6 +39,12 @@ Input data files (data.zip) were too large to upload to github, instead they can
 | Pleistocene: MIS19 | ca. 787 ka |
 | Pliocene: mid-Pliocene warm period (Mid) | 3.264-3.025 Mya, set as equal to 3.264 Mya|
 | Pliocene: M2 | ca. 3.3 Mya |
+
+
+[ETPO1_res.asc](https://www.ngdc.noaa.gov/mgg/global/) (Note: This layer was modified as described in 03_ApplyPaleoLayerGenerate.R). 
+
+
+
 
 
 ### 01_InputCSV.R
