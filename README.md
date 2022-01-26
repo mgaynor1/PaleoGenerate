@@ -92,7 +92,10 @@ Compared to Oscillayers (Gamisch 2019) we found that our inferred layers were ov
 
 These methods were generated for the following publication:
 
-Folk RA*, Gaynor ML*, Okuyama Y, Grady CJ, and Guralnick RP. Ancestral niche and range contact through time in the Heuchera group. In prep. 
+Folk RA*, Gaynor ML*, et al. Ancestral niche and range contact through time in the Heuchera group. In prep. 
 
 This project began before COVID-19 and originally was meant to be a stand-alone publication. I want to thank M.W. Beltiz and C.J. Campbell for their guidance and encouragement. 
+
+
+*equally contributing authors
 
