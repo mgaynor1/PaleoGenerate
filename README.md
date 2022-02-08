@@ -21,7 +21,7 @@ PaleoGenerate is an R project used to generate Bioclim variables at time between
 
 **Note**: Despite the ability of these scripts to generate predictions for additional variables, we caution this use. 
 
-Historical trends in temperature and precipitation are temporally and spatially distinct; given the use of temperature data for extrapolation, we conservatively excluded layers that are based on a relationship between precipitation and temperature (Bio8–Bio11 and Bio16–Bio19). Our methods substantially improve upon Oscillayers [(Gamisch, 2019)](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12979), a recent similar attempt to generate gridded paleoclimate data with high temporal resolution, which has been the subject of criticism [Brown et al. 2020](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.13103). Our work addresses a number of these criticisms. Among the limitations pointed out by Brown et al. (2020)  is that the Oscillayers approach assumes no spatio-temporal variation in climates; this is potentially problematic because historical climate change had high spatial heterogeneity. We address this limitation by utilizing a stronger set of historical time periods through Paleoclim layers and avoid extrapolation in the predictions. However, as an important potential shortcoming, we point out that we are assuming a linear relationship between global temperature and precipitation for the precipitation datasets; therefore we caution care in the use of the the use of our precipitation layers (Bio12, Bio13, Bio14, and Bio15) but provide functions for them for the benefit of interested users. 
+Historical trends in temperature and precipitation are temporally and spatially distinct; given the use of temperature data for extrapolation, we conservatively excluded layers that are based on a relationship between precipitation and temperature (Bio8–Bio11 and Bio16–Bio19). Our methods substantially improve upon Oscillayers [(Gamisch, 2019)](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12979), a recent similar attempt to generate gridded paleoclimate data with high temporal resolution, which has been the subject of criticism in [Brown et al. 2020](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.13103). Our work addresses a number of these criticisms. Among the limitations pointed out by Brown et al. (2020)  is that the Oscillayers approach assumes no spatio-temporal variation in climates; this is potentially problematic because historical climate change had high spatial heterogeneity. We address this limitation by utilizing a stronger set of historical time periods through Paleoclim layers and avoid extrapolation in the predictions by only predicting time points within 0 - 3.3 Mya. However, as an important potential shortcoming, we point out that we are assuming a linear relationship between global temperature and precipitation for the precipitation datasets; therefore we caution care in the use of the the use of our precipitation layers (Bio12, Bio13, Bio14, and Bio15) but provide functions for them for the benefit of interested users. 
 
 ---
 
@@ -29,7 +29,7 @@ Historical trends in temperature and precipitation are temporally and spatially 
 ![Figure 1: Flowchart of workflow for generating layers with PaleoGenerate. Red points in Hansen plot indicate the corresponding surface temperature for each time point included.](Workflow.jpg)
 
 
-### Input Files
+## Setup
 Input data files (data/) were too large to upload to github, instead they can be downloaded as described. We obtained from [PaleoClim layers](http://paleoclim.org/) ([Brown et al. 2018)](https://www.nature.com/articles/sdata2018254) included the following (data/InputLayers):
 
 | Name | Age |
@@ -44,19 +44,17 @@ Input data files (data/) were too large to upload to github, instead they can be
 [ETPO1_res.asc](https://www.ngdc.noaa.gov/mgg/global/) (Note: This layer was modified as described in 03_ApplyPaleoLayerGenerate.R). 
 
 
-
-
-
-### 01_InputCSV.R
+## 01_InputCSV.R
 Prior to reconstructing time points, for each input layer we implemented a series of processing steps to reduce spatial resolution to reduce computational times for downstream extrapolation (see 01_InputCSV.R). First, given our interest was scoped to the northern hemisphere, we cropped the layers to the extent of 180 E, 180 W, 0 N, and 90 N. We then aggregated each layer by a factor of two, resulting in four times fewer cells, using raster’s aggregate function. The raster was then converted to a dataframe for kriging. 
-
-### 02_KriggingLayers.R
+  
+  
+## 02_KriggingLayers.R
 Universal kriging was used to calculate geographically interpolated surfaces with spatial linear dependence (see 02_KriggingLayers.R). 
 
 For each dataframe, we determined a variogram where the bioclim variable values were linearly dependent on the spatial coordinates (i.e., in R notation, bio ~ longitude + latitude) with the autofitVariogram function from the R package [automaps](https://cran.r-project.org/web/packages/automap/index.html). Next, kriging was implemented using the krige function from the R package [gstat](https://cran.microsoft.com/snapshot/2019-05-02/web/packages/gstat/gstat.pdf) and finally interpolated surfaces were merged into one raster. Due to computational intensiveness, we parallelized the previous process by separating the raster into 30 dataframes, and after kriging we merged the 30 rasters back together. **Warning: This was run in parallel on 15 cores. Change this setting if run locally.**
 
  
-### 03_ApplyPaleoLayerGenerate.R
+## 03_ApplyPaleoLayerGenerate.R
 We created a function, *Paleo_layergenerate*, to automate production of layers between an indicated time period for a specific variable.    
 
 First we calculated Δ layers between two input layers that are most similar in surface temperature to the desired time point using the temperature curve. We identified the surface temperature associated with the desired time point through linear interpolation on [Hansen (2013)](https://royalsocietypublishing.org/doi/10.1098/rsta.2012.0294) with the R function approx. We calculated the difference between the layer with the closest minimum surface temperature and the layer with the closest maximum surface temperature using the overlay function from the [raster R package](https://cran.r-project.org/web/packages/raster/index.html).    
@@ -76,7 +74,9 @@ We implemented these methods to generate layers for 51 time slices between 0 and
 
 We tested the ability of our method to reconstruct time points within the temporal extent of PaleoClim data (0.021 mya, 0.787 mya, and 3.264 mya). Reconstruction accuracy was assessed via a jackknife approach, successively removing one layer at a time and predicting the missing raster. We calculated the mean difference between the PaleoClim layer and the inferred layer, as well as the pearson correlation coefficient between layers using layerStats function from the raster R package. Our time slices overlapped with 30 points inferred by Gamisch (2019), so we calculated mean difference and the Pearson correlation coefficient between Oscillayers and our predicted layers at these points. 
 
-## Results    
+---
+
+# Results    
  
 Based on our jackknife approach applied to infer bio1 for 0.021, 0.787, and 3.3 MYA, we found Pearson correlation coefficients (r) of 0.744, 0.839, and 0.921 respectively (See predction_testing/Supplemental-Tables.pdf, Table S1), indicating high overall similarity at the global scale to the layers inferred by PaleoClim. 
 
@@ -92,7 +92,7 @@ Compared to Oscillayers (Gamisch 2019) we found that our inferred layers were ov
 
 These methods were generated for the following publication:
 
-Folk RA*, Gaynor ML*, et al. Ancestral niche and range contact through time in the Heuchera group. In prep. 
+Folk RA*, Gaynor ML*, et al. Identifying climatic drivers of hybridization in Heuchera (Saxifragaceae). In prep. 
 
 This project began before COVID-19 and originally was meant to be a stand-alone publication. I want to thank M.W. Beltiz and C.J. Campbell for their guidance and encouragement. 
 
