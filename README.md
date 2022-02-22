@@ -61,7 +61,7 @@ First we calculated Δ layers between two input layers that are most similar in 
 
 We then calculated and applied a surface temperature correction. Specifically, the surface temperature correction was equal to (T<sub>SI</sub> - T<sub>SB</sub>)/(T<sub>SA</sub> - T<sub>SB</sub>), where T<sub>SI</sub> is the approximate value for the time being reconstructed or the temperature surface initial, T<sub>SA</sub> is the approximate value of the closest minimum surface temperature, and T<sub>SB</sub> is the approximate value of the closest maximum surface temperature. The Δ layers are multiplied by the surface temperature correction, the product is call our ΔT layer.
 
-ΔT layers are then downscaled to the original resolution with the Delta method [(Ramírez Villegas and Jarvis 2010)
+ΔT layers are then corrected with the Delta method [(Ramírez Villegas and Jarvis 2010)
 ](https://cgspace.cgiar.org/handle/10568/90731) by adding the layer with the closest maximum surface temperature (T<sub>SB</sub>).
 
 Using the [ETOPO1 Global relief model](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.dem:316) we corrected coastlines for each time period. Specifically, ETOPO1 extent was cropped to match the Bio layers (180 E, 180 W, 0 N, and 90 N). The resolution of the ETOPO1 layer was set to match the Bio layers using a nearest neighbor approach with the projectRaster function in the R package raster. We corrected the raster values for ETOPO1 by adding an approximated sea level change  (Hansen et al. 2013; Gamisch 2019) to each value. This raster was converted to a mask following Gamisch (2019), and was multiplied with the ΔT layer.
