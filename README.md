@@ -47,7 +47,7 @@ Input data files (data/) were too large to upload to github, instead they can be
 
 
 ## 01_InputCSV.R
-Prior to reconstructing time points, for each input layer we implemented a series of processing steps to reduce spatial resolution to reduce computational times for downstream extrapolation (see 01_InputCSV.R). First, given our interest was scoped to the northern hemisphere, we cropped the layers to the extent of 180 E, 180 W, 0 N, and 90 N. We then aggregated each layer by a factor of two, resulting in four times fewer cells, using raster’s aggregate function. The raster was then converted to a dataframe for kriging. 
+Prior to reconstructing time points, for each input layer we implemented a series of processing steps to reduce spatial resolution, which reduced computational times for downstream processes (see 01_InputCSV.R). First, given our interest was scoped to the northern hemisphere, we cropped the layers to the extent of 180 E, 180 W, 0 N, and 90 N. We then aggregated each layer by a factor of two, resulting in four times fewer cells, using raster’s aggregate function. The raster was then converted to a dataframe for kriging. 
   
   
 ## 02_KriggingLayers.R
