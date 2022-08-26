@@ -99,7 +99,7 @@ Compared to Oscillayers (Gamisch 2019) we found that our inferred layers were ov
 
 These methods were generated for the following publication:
 
-Folk RA*, Gaynor ML*, et al. 2022. Identifying climatic drivers of hybridization in Heuchereae (Saxifragaceae). *In review*. [Preprint avaliable](https://www.biorxiv.org/content/10.1101/2022.08.24.505154v1)
+Folk RA*, Gaynor ML*, Engle-Wrye NJ, O’Meara BC, Soltis PS, Soltis DS, Guralnick RP, Smith SA, Grady CJ, Okuyama Y. 2022. Identifying climatic drivers of hybridization in Heuchereae (Saxifragaceae). *In review*. [Preprint avaliable](https://www.biorxiv.org/content/10.1101/2022.08.24.505154v1)
 
 *equally contributing authors
 
