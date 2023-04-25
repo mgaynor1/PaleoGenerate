@@ -111,6 +111,6 @@ Folk RA*, Gaynor ML*, Engle-Wrye NJ, O’Meara BC, Soltis PS, Soltis DS, Guralni
 
 ---
 
-I want to thank M.W. Beltiz and C.J. Campbell for their guidance and encouragement. 
+I want to thank M.W. Belitz and C.J. Campbell for their guidance and encouragement. 
 
 
